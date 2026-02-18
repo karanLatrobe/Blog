@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+      <div style="font-size:40px; color:Orange">Category : {{category}}</div>
+      <main role="main" class="container p-0">
+        <div class="row">
+          {% for post in posts%}
+          <div style="background-image:url({{post.featured_image.url}}); background-size:cover; width:300px; height:200px;"></div>
+          <div class="col-md-8 blog-main">
+            <div class="blog-post">
+              <h2 class="blog-post-title">{{post.title | truncatewords:10}}</h2>
+              <p class="blog-post-meta">
+                {{post.created_at}}<a href="#">{{post.author}}</a>
+              </p>
+
+              <p>{{post.short_description | truncatewords:30}}</p>
+            </div>
+            <!-- /.blog-post -->
+          </div>
+          {% endfor%}
+          <!-- /.blog-main -->
+
+          
+          <!-- /.blog-sidebar -->
+        </div>
+        <!-- /.row -->
+      </main>
+      <!-- /.container -->
+    </div>
+
+    {% endblock content %}
