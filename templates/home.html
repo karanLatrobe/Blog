@@ -2,7 +2,7 @@
 
 
 {% block content %}
-      {% for post in featured_posts%}
+      {% comment %} {% for post in featured_posts%}
         {% if forloop.first%}
         <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark" style="background-image: url({{post.featured_image.url}});background-blend-mode: overlay;background-size:cover;">
           <div class="col-md-8 px-0">
@@ -14,23 +14,72 @@
           </div>
         </div>
         {% endif%}
-      {% endfor%}
+      {% endfor%} {% endcomment %}
 
 
-      <div style="font-size:40px; color:Orange">Feature Image</div>
-      <div class="row mb-2">
-        {% for post in featured_posts%}
-        <div class="col-md-6">
-          <div class="card border-0">
-            <div class="card-body">
-              <h3>{{post.title}}</h3>
-              <small class="mb-1 text-muted">{{post.created_at | timesince}} ago | {{post.author}}</small>
-              <p class="card-text">{{post.short_description}}</p>
-            </div>
-          </div>
+
+ <div class="flex flex-col lg:flex-row gap-8 font-sans ">
+  
+  <div class="w-full lg:w-[70%]">
+    <h2 class="text-2xl font-medium underline text-zinc-800 mb-6 pb-2">
+      All Articles
+    </h2>
+
+    <div class="flex flex-col gap-1"> 
+      {% for post in featured_posts %}
+      <article class="flex flex-col md:flex-row gap-5 group items-start">
+        
+        <div 
+          class="w-full md:w-[200px] h-[150px] flex-shrink-0 overflow-hidden shadow-sm border border-gray-100"
+          style="background-image: url('{{post.featured_image.url}}'); background-size: cover; background-position: top;"
+        >
+          <div class="w-full h-full bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
         </div>
-        {% endfor%}
-      </div>
+
+        <div class="flex flex-col justify-start">
+          
+          <h3 class="text-[1.15rem] font-semibold text-gray-900 group-hover:text-orange-600 transition-colors duration-200 leading-tight">
+            {{post.title}}
+          </h3>
+          
+          <div class="flex items-center gap-2 text-[13px] text-gray-500 mt-1 mb-1.5">
+            <span>{{post.author}}</span>
+            <span class="text-gray-300">•</span>
+            <span>{{post.created_at | timesince}} ago</span>
+          </div>
+
+          <p class="text-gray-600 text-[14px] leading-snug line-clamp-3">
+            {{post.short_description}}
+          </p>
+          
+          <div class="mt-2">
+            <span class="text-orange-600 font-semibold text-[12px] uppercase tracking-wider group-hover:underline cursor-pointer">
+              Read Story →
+            </span>
+          </div>
+
+        </div>
+
+      </article>
+      
+      {% if not forloop.last %}
+        <hr class="border-gray-100 my-1">
+      {% endif %}
+      
+      {% endfor %}
+    </div>
+  </div>
+
+<aside class="w-full lg:w-[30%] text-gray-700 text-sm">
+    <div class="p-4 bg-gray-50 border border-gray-400 rounded-sm">
+      <h3 class="font-semibold text-gray-900 mb-3 border-b pb-2">Karan Sharma</h3>
+      I’m an AI & Machine Learning Engineer passionate about building intelligent, real-world solutions using deep learning and Generative AI. With hands-on experience in developing end-to-end ML systems, I specialize in CNN, LSTM, and transformer-based models, along with Retrieval-Augmented Generation (RAG) using LLMs and LangChain
+    </div>
+  </aside>
+
+</div>
+
+      
 
       <div style="font-size:40px; color:Orange">Recent Posts</div>
       <main role="main" class="container p-0">

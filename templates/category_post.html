@@ -1,32 +1,64 @@
-
 {% extends "base.html" %}
 
 {% block content %}
-      <div style="font-size:40px; color:Orange">Category : {{category}}</div>
-      <main role="main" class="container p-0">
-        <div class="row">
-          {% for post in posts%}
-          <div style="background-image:url({{post.featured_image.url}}); background-size:cover; width:300px; height:200px;"></div>
-          <div class="col-md-8 blog-main">
-            <div class="blog-post">
-              <h2 class="blog-post-title">{{post.title | truncatewords:10}}</h2>
-              <p class="blog-post-meta">
-                {{post.created_at}}<a href="#">{{post.author}}</a>
-              </p>
+<div class="flex flex-col lg:flex-row gap-8 font-sans">
+  
+  <div class="w-full lg:w-[70%]">
+    <h2 class="text-2xl font-medium underline text-zinc-800 mb-6 pb-2">
+      Category : {{category}}
+    </h2>
 
-              <p>{{post.short_description | truncatewords:30}}</p>
-            </div>
-            <!-- /.blog-post -->
-          </div>
-          {% endfor%}
-          <!-- /.blog-main -->
-
-          
-          <!-- /.blog-sidebar -->
+    <div class="flex flex-col ">
+      {% for post in posts %}
+      <article class="flex flex-col md:flex-row gap-5 group items-start">
+        
+        <div 
+          class="w-full md:w-[200px] h-[150px] flex-shrink-0 overflow-hidden shadow-sm border border-gray-100"
+          style="background-image: url('{{post.featured_image.url}}'); background-size: cover; background-position: top;"
+        >
+          <div class="w-full h-full bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
         </div>
-        <!-- /.row -->
-      </main>
-      <!-- /.container -->
-    </div>
 
-    {% endblock content %}
+        <div class="flex flex-col justify-start">
+          
+          <h3 class="text-[1.15rem] font-semibold text-gray-900 group-hover:text-orange-600 transition-colors duration-200 leading-tight">
+            {{post.title | truncatewords:10}}
+          </h3>
+          
+          <div class="flex items-center gap-2 text-[13px] text-gray-500 mt-1 mb-1.5">
+            <span>{{post.created_at}}</span>
+            <span class="text-gray-300">•</span>
+            <a href="#" class="hover:text-orange-600 hover:underline">{{post.author}}</a>
+          </div>
+
+          <p class="text-gray-600 text-[14px] leading-snug">
+            {{post.short_description | truncatewords:30}}
+          </p>
+          
+          <div class="mt-2">
+            <span class="text-orange-600 font-semibold text-[12px] uppercase tracking-wider group-hover:underline cursor-pointer">
+              Read Story →
+            </span>
+          </div>
+
+        </div>
+
+      </article>
+      
+      {% if not forloop.last %}
+        <hr class="border-gray-100 my-1">
+      {% endif %}
+      
+      {% endfor %}
+    </div>
+  </div>
+
+  <aside class="w-full lg:w-[30%] text-gray-700 text-sm">
+    <div class="p-4 bg-gray-50 border border-gray-100 rounded-sm">
+      <h3 class="font-semibold text-gray-900 mb-3 border-b pb-2">About Category</h3>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore, ad reiciendis! Mollitia dolores eos omnis, repellendus quisquam eum commodi.
+    </div>
+  </aside>
+
+</div>
+{% endblock content %}
