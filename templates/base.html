@@ -21,14 +21,16 @@
 <div class="sticky top-0 z-50">
     
     <header class="bg-zinc-800 text-white py-4">
-      <div class="max-w-7xl mx-auto flex justify-between items-center px-6">
-        <div class="text-lg font-semibold">
-          <a class="text-gray-200" href="#">KARAN_SHARMA</a>
+      <div class="max-w-7xl mx-auto flex justify-between items-center px-6 " >
+        <div class="text-[15px] uppercase flex gap-5" style="font-family:roboto">
+          <a class="text-zinc-300" href="#">Portfolio</a>
+          <a class="text-zinc-300" href="#">Projects</a>
+          <a class="text-zinc-300" href="#">About</a>
         </div>
 
         <div>
           <form action="{% url 'search' %}" method="GET" class="flex gap-0 h-8 border border-gray-500 rounded-[5px]">
-            <input type="text" name = "keyword" value="{{keyword}}" placeholder="Search article here..." class='h-full px-1 w-[300px] outline-none border-none focus:outline focus:outline-gray-400 border border-gray-500 h-8 rounded-[3px] bg-zinc-900 rounded-[5px]'>
+            <input type="text" name = "keyword" value="{{keyword}}" placeholder="Search article here..." class='h-full px-2 capitalize text-zinc-200 w-[300px] outline-none border-none focus:outline focus:outline-gray-400 border border-gray-500 h-8 rounded-[3px] bg-zinc-900 rounded-[5px]'>
             <button type="submit" value="Search" class="px-2 h-full bg-zinc-700 hover:bg-yellow-500 hover:text-black rounded-r-[5px]  text-sm">Submit</button>
           </form>
         </div>
@@ -41,12 +43,26 @@
           <a href="{{social_media.social_media_link}}" target = "_blank"><i class="fa-brands fa-square-linkedin  text-[1.5rem] rounded cursor-pointer text-zinc-200"></i></a>
           {% endif %}
           {% endfor %}
-          <a class="bg-yellow-500 hover:bg-yellow-600 text-black text-sm px-4 py-1 rounded cursor-pointer">
+
+          {% if not user.is_authenticated %}
+          <a href="{% url "login" %}" class="bg-yellow-500 hover:bg-yellow-600 text-black text-sm px-4 py-1 rounded cursor-pointer">
             Login
           </a>
-          <a class="border border-gray-300 text-white hover:bg-gray-700 text-sm px-4 py-1 rounded cursor-pointer">
+          <a href="{% url "register" %}" class="border border-gray-300 text-white hover:bg-gray-700 text-sm px-4 py-1 rounded cursor-pointer">
+
             Register
           </a>
+          {% else %}
+          <a  class="border border-zinc-200 border-white text-zinc-200   text-sm px-3 py-1 rounded-[5px]    cursor-pointer ">
+
+            {{user.username}}
+          </a>
+
+          <a href="{% url "logout" %}" class="  text-white hover:bg-yellow-500 text-sm px-1  py-1 text-zinc-900 font-bold  cursor-pointer rounded-[5px] ">
+
+            <i class="fa-solid fa-arrow-right-from-bracket text-white hover:text-zinc-900 "></i>
+          </a>
+          {% endif%}
         </div>
       </div>
     </header>
