@@ -8,50 +8,63 @@
 
   <!-- Tailwind -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&family=Lora:wght@400;500;600;700&family=Merriweather:wght@300;400;700&family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet" />
 </head>
 
 <body class="bg-gray-100">
 
   <!-- HEADER -->
-  <header class="bg-zinc-800 text-white py-4  ">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-6">
+<div class="sticky top-0 z-50">
+    
+    <header class="bg-zinc-800 text-white py-4">
+      <div class="max-w-7xl mx-auto flex justify-between items-center px-6">
+        <div class="text-lg font-semibold">
+          <a class="text-gray-200" href="#">KARAN_SHARMA</a>
+        </div>
 
-      <div class="text-lg font-semibold">
-        <a class="text-gray-200" href="#">KARAN_SHARMA</a>
+        <div>
+          <form action="{% url 'search' %}" method="GET" class="flex gap-0 h-8 border border-gray-500 rounded-[5px]">
+            <input type="text" name = "keyword" value="{{keyword}}" placeholder="Search article here..." class='h-full px-1 w-[300px] outline-none border-none focus:outline focus:outline-gray-400 border border-gray-500 h-8 rounded-[3px] bg-zinc-900 rounded-[5px]'>
+            <button type="submit" value="Search" class="px-2 h-full bg-zinc-700 hover:bg-yellow-500 hover:text-black rounded-r-[5px]  text-sm">Submit</button>
+          </form>
+        </div>
+        <div class="flex items-center space-x-3">
+          {% for social_media in social_links %}
+          {% if social_media.social_media_name == "Github" %}
+          <a href="{{social_media.social_media_link}}" target = "_blank"><i class="fa-brands fa-github  text-[1.5rem]  rounded cursor-pointer text-zinc-200"></i></a>
+          {% endif%}
+          {% if social_media.social_media_name == "Linkedin" %}
+          <a href="{{social_media.social_media_link}}" target = "_blank"><i class="fa-brands fa-square-linkedin  text-[1.5rem] rounded cursor-pointer text-zinc-200"></i></a>
+          {% endif %}
+          {% endfor %}
+          <a class="bg-yellow-500 hover:bg-yellow-600 text-black text-sm px-4 py-1 rounded cursor-pointer">
+            Login
+          </a>
+          <a class="border border-gray-300 text-white hover:bg-gray-700 text-sm px-4 py-1 rounded cursor-pointer">
+            Register
+          </a>
+        </div>
       </div>
+    </header>
 
-      <div class="flex items-center space-x-3">
-        <a class="bg-yellow-500 hover:bg-yellow-600 text-black text-sm px-4 py-1 rounded">
-          Login
-        </a>
-        <a class="border border-gray-300 text-white hover:bg-gray-700 text-sm px-4 py-1 rounded">
-          Register
-        </a>
-      </div>
-
-    </div>
-  </header>
-
-
-      <!-- CATEGORY NAV -->
-    <div class="py-3 border-b border-b-gray-500">
-      <nav class="max-w-7xl mx-auto flex justify-between items-center text-[15px] text-zinc-800 px-6 ">
-
-        <a class="hover:text-black"
-             href="{% url 'home' %}">
-             All Articles
+    <div class="py-3 border-b border-b-gray-300 bg-gray-100 ">
+      <nav class="max-w-7xl mx-auto flex justify-between items-center text-[15px] text-zinc-800 px-6">
+        <a class="hover:text-black font-medium" href="{% url 'home' %}" style="font-family:Cambria">
+          All Articles
         </a>
         {% for category in categories %}
-          <a class="hover:text-black"
-             href="{% url 'post_by_category' category.id %}">
-             {{ category }}
+          <a class="hover:text-black font-medium" href="{% url 'post_by_category' category.id %}" style="font-family:Cambria">
+            {{ category }}
           </a>
         {% endfor %}
-
       </nav>
     </div>
+
+  </div>
   <!-- MAIN CONTAINER -->
   <div class="max-w-7xl mx-auto px-6  py-6">
 

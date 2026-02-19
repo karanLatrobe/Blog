@@ -1,28 +1,18 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
 
 {% block content %}
-  {% comment %} {% for post in featured_posts %}
-    {% if forloop.first %}
-      <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark" style="background-image: url({{ post.featured_image.url }});background-blend-mode: overlay;background-size:cover;">
-        <div class="col-md-8 px-0">
-          <h1 class="display-4 font-italic">{{ post.title }}</h1>
-          <p class="lead my-3">{{ post.short_description }}</p>
-          <p class="lead mb-0">
-            <a href="#" class="text-white font-weight-bold">Continue reading...</a>
-          </p>
-        </div>
-      </div>
-    {% endif %}
-  {% endfor %} {% endcomment %}
 
-  <div class="flex flex-col lg:flex-row gap-8 font-sans">
+{% if blogs %}
+
+<div class="flex flex-col lg:flex-row gap-8 font-sans">
     <div class="w-full lg:w-[70%]">
-      <h2 class="text-2xl font-medium underline text-zinc-800 mb-6 pb-2">All Articles</h2>
+      <h2 class="text-2xl font-medium  text-zinc-800 mb-6 pb-2">Search Term: <span class="text-yellow-500 capitalize">{{keyword}}</span></h2>
 
       <div class="flex flex-col">
-        {% for post in featured_posts %}
+        {% for post in blogs %}
           <article class="flex flex-col md:flex-row box-content gap-5 group items-start hover:cursor-pointer">
-            <div class="w-full md:w-[200px] h-[150px] flex-shrink-0 overflow-hidden shadow-sm border border-gray-100" style="background-image: url('{{ post.featured_image.url }}'); background-size: 100% 100%; background-position: top;">
+            <div class="w-full md:w-[200px] h-[150px] flex-shrink-0 overflow-hidden shadow-sm border border-gray-100" style="background-image: url('{{ post.featured_image.url }}'); background-size: cover; background-position: top;">
               <div class="w-full h-full bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
             </div>
 
@@ -43,7 +33,6 @@
             </div>
           </article>
 
-
           {% if not forloop.last %}
             <hr class="border-gray-100 my-1" />
           {% endif %}
@@ -51,13 +40,13 @@
       </div>
     </div>
 
-    <aside class="w-full lg:w-[30%] text-gray-700 text-sm gap-5 flex flex-col">
-      <div class="p-4 bg-gray-50  rounded-sm">
+    <aside class="w-full lg:w-[30%] text-gray-700 text-sm gap-5 flex flex-col ">
+      <div class="p-4 bg-gray-50 border border-gray-400 rounded-sm">
         <h3 class="font-semibold text-gray-900 mb-3 border-b pb-2">{{ about.about_heading }}</h3>
         <p>{{ about.about_description }}</p>
       </div>
 
-      <div class="p-4 bg-gray-50  rounded-sm">
+      <div class="p-4 bg-gray-50 border border-gray-400 rounded-sm">
         <h3 class="font-semibold text-gray-900 mb-3 border-b pb-2">Social Media Links</h3>
         {% for social_media in social_links %}
           <p>
@@ -67,4 +56,7 @@
       </div>
     </aside>
   </div>
-{% endblock %}
+{% else%}
+<p class='text-center text-2xl' style="font-family:Cambria">! Article Not Found Realted to <span class="font-bold capitalize text-yellow-500">{{keyword}}</span></p>
+{% endif %}
+{% endblock content %}

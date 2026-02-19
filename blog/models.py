@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     category_name = models.CharField(max_length= 50)
+    category_description = models.TextField(max_length=500, default = "Category Sample Content")
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 

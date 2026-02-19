@@ -4,8 +4,8 @@
 <div class="flex flex-col lg:flex-row gap-8 font-sans">
   
   <div class="w-full lg:w-[70%]">
-    <h2 class="text-2xl font-medium underline text-zinc-800 mb-6 pb-2">
-      Category : {{category}}
+    <h2 class="text-2xl font-medium underline text-zinc-800 mb-6 pb-2" style="font-family:Cambria">
+      Category : {{category.category_name}}
     </h2>
 
     <div class="flex flex-col ">
@@ -21,8 +21,9 @@
 
         <div class="flex flex-col justify-start">
           
-          <h3 class="text-[1.15rem] font-semibold text-gray-900 group-hover:text-orange-600 transition-colors duration-200 leading-tight">
-            {{post.title | truncatewords:10}}
+          <h3 class="text-[1.15rem] font-semibold text-gray-900 group-hover:text-orange-600 transition-colors duration-200 leading-tight" style="font-family:Cambria">
+            <a href="{% url "blogs" post.slug%}">{{post.title | truncatewords:10}}</a>
+            
           </h3>
           
           <div class="flex items-center gap-2 text-[13px] text-gray-500 mt-1 mb-1.5">
@@ -31,13 +32,14 @@
             <a href="#" class="hover:text-orange-600 hover:underline">{{post.author}}</a>
           </div>
 
-          <p class="text-gray-600 text-[14px] leading-snug">
+          <p class="text-gray-600 text-[14px] leading-snug" style="font-family:Inter">
             {{post.short_description | truncatewords:30}}
           </p>
           
           <div class="mt-2">
             <span class="text-orange-600 font-semibold text-[12px] uppercase tracking-wider group-hover:underline cursor-pointer">
-              Read Story →
+              <a href="{% url "blogs" post.slug%}">Read Story →</a>
+              
             </span>
           </div>
 
@@ -53,10 +55,10 @@
     </div>
   </div>
 
-  <aside class="w-full lg:w-[30%] text-gray-700 text-sm">
-    <div class="p-4 bg-gray-50 border border-gray-100 rounded-sm">
+  <aside class="w-full lg:w-[30%] text-gray-700 text-sm ">
+    <div class="p-4 bg-gray-50 border border-gray-100 rounded-sm ">
       <h3 class="font-semibold text-gray-900 mb-3 border-b pb-2">About Category</h3>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore, ad reiciendis! Mollitia dolores eos omnis, repellendus quisquam eum commodi.
+      <p>{{category.category_description}}</p>
     </div>
   </aside>
 
