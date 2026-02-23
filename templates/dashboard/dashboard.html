@@ -1,0 +1,23 @@
+{% extends "../base.html" %}
+
+{% block content %}
+
+<div class=' flex'>
+    {% include "dashboard/sidebar.html" %}
+    <div class= 'flext-1 w-full right w-[300px] p-10'>
+        
+        <div>
+            <div class="flex gap-10 ">
+                <div class='w-300px  border border-zinc-500  flex flex-col flex-1'>
+                    <div class="w-full  bg-gray-200 text-center font-medium  py-3  border-b border-zinc-500 ">Total Categories</div>
+                    <div class="text-center text-xl font-medium w-full py-8">{{total_categories}}</div>
+                </div>
+                <div class='w-300px  border border-zinc-500   flex flex-col flex-1'>
+                    <div class="w-full  bg-gray-200 text-center font-medium    border-b border-zinc-500 py-3 ">Total Articles</div>
+                    <div class="text-center text-xl font-medium w-full py-8">{{total_articles}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,7 @@
+<div class= "   flex flex-col border-r border-zinc-300 px-3">
+        <a href="{% url "dashboard" %}" class='{% if '/dashboard/' == request.path %} bg-yellow-500{% endif %} py-2 px-10 rounded-[5px] font-medium'>Dashboard</a>
+        <a href="{% url "dashboard_categories" %}" class='{% if '/dashboard/categories/' == request.path %} bg-yellow-500{% endif %} py-2 px-10 rounded-[5px] font-medium'>Categories</a>
+        <a href="{% url "dashboard_article" %}" class='{% if '/dashboard/article/' == request.path %} bg-yellow-500{% endif %}  py-2 px-10 rounded-[5px] font-medium'>Articles</a>
+        <a href="#" class=' py-2 px-10 rounded-[5px] font-medium'>Logout</a>
+</div>
+

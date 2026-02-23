@@ -1,0 +1,57 @@
+{% extends "../base.html" %}
+
+{% block content %}
+
+<div class=' flex'>
+    <div class= "   flex flex-col">
+        <a href="{% url "dashboard" %}" class=' py-2 px-10 rounded-[5px] font-medium'>Dashboard</a>
+        <a href="{% url "dashboard_categories" %}" class='bg-yellow-500 py-2 px-10 rounded-[5px] font-medium'>Categories</a>
+        <a href="#" class=' py-2 px-10 rounded-[5px] font-medium'>Posts Test</a>
+        <a href="#" class=' py-2 px-10 rounded-[5px] font-medium'>Logout</a>
+    </div>
+    <div class="flex-1 w-full right w-[300px] p-10">
+    <form action="{% url "edit_category" category.id %}" method="POST" class="space-y-6" >
+        {% csrf_token %}
+
+        <!-- Category Name -->
+        <div>
+            <label for="id_category_name" class="block  font-medium text-zinc-800">
+                Category Name
+            </label>
+            <input 
+                type="text" 
+                name="category_name" 
+                id="id_category_name"
+                value="{{ form.category_name.value|default:'' }}"
+                class="mt-2 w-[700px] border border-zinc-300 rounded-[5px]  p-2 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+                required
+            >
+        </div>
+
+        <!-- Category Description -->
+        <div>
+            <label for="id_category_description" class="block  font-medium text-zinc-800">
+                Category Description
+            </label>
+            <textarea 
+                name="category_description"
+                id="id_category_description"
+                rows="4"
+                class="mt-2 w-[700px] h-40 border border-zinc-300 p-2 rounded-[5px] focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+            >{{ form.category_description.value|default:'' }}</textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+            <button 
+                type="submit"
+                class="px-10 bg-zinc-800 text-white border border-transparent py-2 rounded-[5px] hover:bg-yellow-500 hover:text-zinc-800 hover:border-zinc-900 transition cursor-pointer"
+            >
+                Save Edit
+            </button>
+        </div>
+
+    </form>
+</div>
+</div>
+{% endblock content %}

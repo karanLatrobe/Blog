@@ -53,6 +53,10 @@
             Register
           </a>
           {% else %}
+          <a  href="{% url "dashboard" %}" class="border border-zinc-200 border-white text-zinc-200   text-sm px-3 py-1 rounded-[5px]    cursor-pointer ">
+
+            Dashboard
+          </a>
           <a  class="border border-zinc-200 border-white text-zinc-200   text-sm px-3 py-1 rounded-[5px]    cursor-pointer ">
 
             {{user.username}}
@@ -91,8 +95,8 @@
   </div>
 
   <!-- FOOTER -->
-  <footer class="text-center text-gray-600 py-6 mt-10 border-t">
-    Django blog built with by
+  <footer class="text-center text-gray-600 py-6 mt-10 border-t  ">
+    Designed by
     <a href="#" class="font-semibold hover:underline">
       Karan Sharma
     </a>

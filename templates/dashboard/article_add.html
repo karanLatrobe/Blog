@@ -1,0 +1,129 @@
+{% extends "../base.html" %}
+
+{% block content %}
+
+<div class=' flex'>
+    <div class= "   flex flex-col">
+        <a href="{% url "dashboard" %}" class='{% if '/dashboard/' == request.path %} bg-yellow-500{% endif %} py-2 px-10 rounded-[5px] font-medium'>Dashboard</a>
+        <a href="{% url "dashboard_categories" %}" class='{% if '/dashboard/categories/' == request.path %} bg-yellow-500{% endif %} py-2 px-10 rounded-[5px] font-medium'>Categories</a>
+        <a href="{% url "dashboard_article" %}" class='bg-yellow-500 py-2 px-10 rounded-[5px] font-medium'>Articles</a>
+        <a href="#" class=' py-2 px-10 rounded-[5px] font-medium'>Logout</a>
+    </div>
+    <div class="flext-1 w-full right w-[300px] px-10 py-2 ">
+    <div class= ' justify-between items-baseline pb-5'><h2 class='text-3xl font-medium ' style = 'font-family:Cambria'>Add New Category</h2></div>
+
+
+     <form method="POST" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+
+        <!-- Title -->
+        <div>
+            <label class="block mb-2 font-medium">Title</label>
+            <input type="text" name="title"
+                   class="w-full border border-gray-300 rounded-[5px] p-2 focus:ring-2 focus:ring-black focus:outline-none">
+        </div>
+
+        <!-- Category -->
+        <div>
+            <label class="block mb-2 font-medium">Category</label>
+            <select name="category"
+                    class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-black focus:outline-none">
+                {% for cat in categories %}
+                    <option value="{{ cat.id }}">{{ cat.category_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Featured Image Upload -->
+        <div>
+            <label class="block mb-2 font-medium">Featured Image</label>
+
+            <label for="featured_image"
+                   class="flex flex-col items-center justify-center w-full px-6 py-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-black transition">
+                
+                <img id="preview"
+                     class="hidden mb-4 w-40 h-40 object-cover rounded-lg shadow">
+
+                <p id="file-label" class="text-gray-600">
+                    Click to upload image
+                </p>
+
+                <input type="file"
+                       name="featured_image"
+                       id="featured_image"
+                       class="hidden"
+                       accept="image/*"
+                       onchange="previewImage(event)">
+            </label>
+        </div>
+
+        <!-- Short Description -->
+        <div>
+            <label class="block mb-2 font-medium">Short Description</label>
+            <textarea name="short_description" rows="3"
+                      class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-black focus:outline-none"></textarea>
+        </div>
+
+        <!-- Blog Body -->
+        <div>
+            <label class="block mb-2 font-medium">Blog Body</label>
+            <textarea name="blog_body" rows="6"
+                      class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-black focus:outline-none"></textarea>
+        </div>
+
+        <!-- Status -->
+        <div>
+            <label class="block mb-2 font-medium">Status</label>
+            <select name="status"
+                    class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-black focus:outline-none">
+                <option value="Draft">Draft</option>
+                <option value="Publish">Publish</option>
+            </select>
+        </div>
+
+        <!-- Featured Toggle -->
+        <div class="flex items-center justify-between">
+            <span class="font-medium">Mark as Featured</span>
+
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" name="is_featured" class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-300 rounded-full peer 
+                            peer-checked:bg-black 
+                            after:content-[''] after:absolute after:top-0.5 after:left-[2px] 
+                            after:bg-white after:border after:rounded-full 
+                            after:h-5 after:w-5 after:transition-all 
+                            peer-checked:after:translate-x-full">
+                </div>
+            </label>
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+            <button type="submit"
+                    class="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition">
+                Publish Blog
+            </button>
+        </div>
+
+    </form>
+</div>
+</div>
+
+
+
+<script>
+function previewImage(event) {
+    const reader = new FileReader();
+    const preview = document.getElementById('preview');
+    const label = document.getElementById('file-label');
+
+    reader.onload = function(){
+        preview.src = reader.result;
+        preview.classList.remove("hidden");
+        label.textContent = event.target.files[0].name;
+    }
+
+    reader.readAsDataURL(event.target.files[0]);
+}
+</script>
+{% endblock content %}

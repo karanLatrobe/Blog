@@ -1,0 +1,69 @@
+{% extends "../base.html" %}
+
+{% block content %}
+
+<div class=' flex'>
+    {% include "dashboard/sidebar.html" %}
+    <div class= 'flext-1 w-full right w-[300px] py-2 px-10'>
+        
+        
+        <div class= 'flex justify-between items-baseline py-2'><h2 class='text-3xl font-medium pl-5' style = 'font-family:Cambria'>All Articles</h2> <a href="{% url "article_add" %}"><div class="bg-zinc-700  px-6 py-1 text-zinc-200 text-[15px]  cursor-pointer border border-transparent hover:bg-yellow-500 hover:text-zinc-800 rounded-[5px] hover:border-zinc-800">Add New</div></a> </div>
+        <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base ">
+            <table class="w-full text-sm text-left rtl:text-right text-body">
+                <thead class="text-sm text-body bg-neutral-secondary-medium  border-t-2 border-b-2 border-default-medium border-zinc-500">
+                    <tr>
+                        <th scope="col" class="px-2 py-3 font-medium">
+                            #
+                        </th>
+                        <th scope="col" class="px-3 py-3 font-medium">
+                            Title
+                        </th>
+                        <th scope="col" class="px-3 py-3 font-medium">
+                            Category
+                        </th>
+                        <th scope="col" class="px-3 py-3 font-medium">
+                            Created On
+                        </th>
+                        <th scope="col" class="px-6 py-3 font-medium">
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3 font-medium">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for article in  articles %}
+                    <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
+                        <th scope="row" class="px-2 py-4 font-medium text-heading whitespace-nowrap">
+                            {{forloop.counter}}
+                        </th>
+                        <td class="px-3 py-4">
+                            {{article.title}}
+                            
+                        </td>
+                        <td class="px-3 py-4">
+                            {{article.category}}
+                        
+                        </td>
+                        <td class="px-3 py-4">
+                            {{article.created_at|date:"M d Y - h:i a"}}
+                        </td>
+                        <td class=" px-6 py-4">
+                            <span class="{% if article.status == 'Publish' %}bg-green-300 {% endif %} px-2  rounded font-medium  text-[12px] text-zinc-700 ">{{article.status}}</span>
+                        </td>
+                        <td class="px-6 py-4 ">
+                            <a href="#" class="font-medium text-fg-brand hover:underline bg-yellow-500 text-zinc-800 px-3 rounded py-1 ">Edit</a>
+                            
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>
+{% endblock content %}

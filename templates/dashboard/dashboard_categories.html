@@ -1,0 +1,66 @@
+{% extends "../base.html" %}
+
+{% block content %}
+
+<div class=' flex'>
+    {% include "dashboard/sidebar.html" %}
+    <div class= 'flext-1 w-full right w-[300px] px-10 py-2'>
+        
+
+        
+        <div class= 'flex justify-between items-baseline py-2'><h2 class='text-3xl font-medium pl-5' style = 'font-family:Cambria'>All Categories</h2> <a href="{% url "add_category" %}"><div class="bg-zinc-700  px-6 py-1 text-zinc-200 text-[15px]  cursor-pointer border border-transparent hover:bg-yellow-500 hover:text-zinc-800 rounded-[5px] hover:border-zinc-800">Add New</div></a> </div>
+        <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base ">
+            <table class="w-full text-sm text-left rtl:text-right text-body">
+                <thead class="text-sm text-body bg-neutral-secondary-medium  border-t-2 border-b-2 border-default-medium border-zinc-500">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 font-medium">
+                            Sr. No.
+                        </th>
+                        <th scope="col" class="px-6 py-3 font-medium">
+                            Category
+                        </th>
+                        <th scope="col" class="px-6 py-3 font-medium">
+                            Created At
+                        </th>
+                        <th scope="col" class="px-6 py-3 font-medium">
+                            Updated At
+                        </th>
+                        <th scope="col" class="px-6 py-3 font-medium">
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for categories in  total_categories %}
+                    <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
+                        <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                            {{forloop.counter}}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{categories.category_name}}
+                            
+                        </td>
+                        <td class="px-6 py-4">
+                            {{categories.created_at}}
+                        
+                        </td>
+                        <td class="px-6 py-4">
+                            {{categories.updated_at}}
+                        </td>
+                        <td class="px-6 py-4 ">
+                            <a href="{% url "edit_category" categories.id %}" class="font-medium text-fg-brand hover:underline "><i class="fa-regular fa-pen-to-square text-green-700 "></i></a>
+                            <a href="{% url "delete_category" categories.id %}" class="font-medium text-fg-brand hover:underline "><i class="fa-regular fa-trash-can text-red-700 "></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+</div>
+{% endblock content %}
