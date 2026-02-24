@@ -7,10 +7,10 @@
         <a href="{% url "dashboard" %}" class='{% if '/dashboard/' == request.path %} bg-yellow-500{% endif %} py-2 px-10 rounded-[5px] font-medium'>Dashboard</a>
         <a href="{% url "dashboard_categories" %}" class=' bg-yellow-500 py-2 px-10 rounded-[5px] font-medium'>Categories</a>
         <a href="{% url "dashboard_article" %}" class='{% if '/dashboard/article/' == request.path %} bg-yellow-500{% endif %}  py-2 px-10 rounded-[5px] font-medium'>Articles</a>
-        <a href="#" class=' py-2 px-10 rounded-[5px] font-medium'>Logout</a>
+        <a href="{% url "logout" %}" class=' py-2 px-10 rounded-[5px] font-medium hover:text-red-600 hover:text-[17px]'>Logout</a>
     </div>
     <div class="flext-1 w-full right w-[300px] px-10 py-2 ">
-    <div class= ' justify-between items-baseline pb-5'><h2 class='text-3xl font-medium ' style = 'font-family:Cambria'>Add New Article</h2></div>
+    <div class= ' justify-between items-baseline pb-5'><h2 class='text-3xl font-medium ' style = 'font-family:Cambria'>Add New Category</h2></div>
     <form action="{% url "add_category" %}" method="POST" class="space-y-6" >
         {% csrf_token %}
 
@@ -46,7 +46,7 @@
         <div>
             <button 
                 type="submit"
-                class="px-10 bg-zinc-800 text-white py-2 rounded-[5px] hover:bg-gray-800 transition"
+                class="px-10 bg-zinc-800 text-white py-2 rounded-[5px] hover:bg-gray-800 hover:bg-yellow-500  hover:text-zinc-900  border border-transparent hover:cursor-pointer hover:border-black transition"
             >
                 Add Category
             </button>

@@ -12,5 +12,7 @@ urlpatterns = [
 
     # ==================== Articles ======================
     path('article/',views.dashboard_article , name = 'dashboard_article'),
-    path('article/add',views.article_add, name = 'article_add')
+    path('article/add',views.article_add, name = 'article_add'),
+    path('article/edit/<slug:slug>/',views.article_edit, name = 'article_edit'),
+    path('article/delete/<int:pk>/',views.article_delete, name = 'article_delete'),
 ]

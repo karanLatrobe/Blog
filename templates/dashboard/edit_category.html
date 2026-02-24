@@ -6,13 +6,13 @@
     <div class= "   flex flex-col">
         <a href="{% url "dashboard" %}" class=' py-2 px-10 rounded-[5px] font-medium'>Dashboard</a>
         <a href="{% url "dashboard_categories" %}" class='bg-yellow-500 py-2 px-10 rounded-[5px] font-medium'>Categories</a>
-        <a href="#" class=' py-2 px-10 rounded-[5px] font-medium'>Posts Test</a>
-        <a href="#" class=' py-2 px-10 rounded-[5px] font-medium'>Logout</a>
+        <a href="{% url "dashboard_article" %}" class='{% if '/dashboard/article/' == request.path %} bg-yellow-500{% endif %}  py-2 px-10 rounded-[5px] font-medium'>Articles</a>
+        <a href="{% url "logout" %}" class=' py-2 px-10 rounded-[5px] font-medium hover:text-red-600 hover:text-[17px]'>Logout</a>
     </div>
-    <div class="flex-1 w-full right w-[300px] p-10">
+    <div class="flex-1 w-full right w-[300px] pl-10 pt-2">
     <form action="{% url "edit_category" category.id %}" method="POST" class="space-y-6" >
         {% csrf_token %}
-
+        <div class= ' justify-between items-baseline '><h2 class='text-3xl font-medium ' style = 'font-family:Cambria'>Edit Category</h2></div>
         <!-- Category Name -->
         <div>
             <label for="id_category_name" class="block  font-medium text-zinc-800">

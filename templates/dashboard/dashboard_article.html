@@ -53,8 +53,9 @@
                         <td class=" px-6 py-4">
                             <span class="{% if article.status == 'Publish' %}bg-green-300 {% endif %} px-2  rounded font-medium  text-[12px] text-zinc-700 ">{{article.status}}</span>
                         </td>
-                        <td class="px-6 py-4 ">
-                            <a href="#" class="font-medium text-fg-brand hover:underline bg-yellow-500 text-zinc-800 px-3 rounded py-1 ">Edit</a>
+                        <td class="px-2 py-4 flex items-center justify-start">
+                            <a href="{% url "article_edit" article.slug%}" class="font-medium text-fg-brand hover:underline text-zinc-800 px-3 rounded py-1 "><i class="fa-regular fa-pen-to-square text-green-700 "></i></a>
+                            <a href="{% url "article_delete" article.id %}" class="font-medium text-fg-brand hover:underline "><i class="fa-regular fa-trash-can text-red-700 "></i></a>
                             
                         </td>
                     </tr>

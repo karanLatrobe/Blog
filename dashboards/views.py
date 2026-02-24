@@ -32,7 +32,7 @@ def add_category(request):
         
         if form.is_valid():
             form.save()
-            redirect('dashboard_categories')
+            return redirect('dashboard_categories')
     else:
         form = CategoryForm()
 
@@ -73,7 +73,10 @@ def article_add(request):
         if form.is_valid():
             form_temp = form.save(commit=False)
             form_temp.author = request.user
-            form.save()
+            title = form.cleaned_data["title"]
+            form_temp.slug = slugify(title) 
+            # + '-' + str(form_temp.id)
+            form_temp.save()
             return redirect("dashboard_article")
     else:
         form = BlogForm()
@@ -81,3 +84,33 @@ def article_add(request):
         'form':form
     }
     return render(request, 'dashboard/article_add.html', context)
+
+
+
+
+def article_edit(request,slug):
+    article = get_object_or_404(Blog,slug = slug)
+    categories = Category.objects.all()
+    if request.method == "POST":
+        form = BlogForm(request.POST, instance = article)
+        if form.is_valid():
+            form_temp = form.save(commit=False)
+            form_temp.author = request.user
+            title = form.cleaned_data["title"]
+            form_temp.slug = slugify(title) 
+            # + '-' + str(form_temp.id)
+            form_temp.save()
+            return redirect("dashboard_article")
+    else:
+        form = BlogForm(instance = article)
+
+    context = {'article':article,'form':form,'categories':categories}
+    return render(request,"dashboard/article_edit.html",context)
+
+
+
+
+def article_delete(request,pk):
+    article = get_object_or_404(Blog,pk=pk)
+    article.delete()
+    return redirect("dashboard_article")
