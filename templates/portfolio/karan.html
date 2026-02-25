@@ -1,0 +1,125 @@
+{% extends "../base.html" %}
+
+{% block content %}
+<main class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+    <div class="lg:col-span-2 space-y-10">
+        
+        <section>
+            <h1 class="text-3xl font-bold underline decoration-2 underline-offset-8 mb-8 text-gray-900">Experience </h1>
+            <div class="space-y-6">
+                {% for experience in experience_detail %}
+                <article class="bg-white p-6 shadow-sm border border-gray-100 transition hover:shadow-md">
+                    <h3 class="text-xl font-bold text-gray-900">{{experience.designation}}</h3>
+                    <p class="text-sm font-semibold text-blue-600 mb-2">{{experience.company}} | {{experience.work_duration}}</p>
+                    <p class="text-sm text-gray-600">{{experience.work_detail}}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section>
+            <h1 class="text-3xl font-bold underline decoration-2 underline-offset-8 mb-8 text-gray-900">Featured Projects</h1>
+            <div class="space-y-6">
+                
+                {% for project in projects %}
+                <article class="bg-white p-6 shadow-sm border border-gray-100 transition hover:shadow-md">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-xl font-bold text-zinc-800">{{project.project_name}} | <span class="text-sm ">{{project.duration}}</span></h3>
+                        <div class='flex gap-10'>
+                            <a href="{{project.codebase}}" target="_blank" class="text-sm text-blue-600 hover:underline "><span class="text-red-600 font-bold">ｏ </span>Code</a>
+                            <a href="{{project.live}}" target="_blank" class="text-sm text-blue-600 hover:underline"><span class="text-green-600 font-bold">ｏ </span>Live</a>
+                        </div>
+                    </div>
+                    <div class="text-sm mt-[-5px]">{{project.company}}</div>
+                    <p class="text-sm text-gray-600 mb-4">
+                        {{project.short_description}}
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-xs font-medium text-gray-500">
+                        {% for technology in tech_stack_list %}
+                        <span class="bg-gray-100 px-2 py-1 rounded border border-gray-200">{{technology}}</span>
+                        {% endfor %}
+                        
+                    </div>
+                </article>
+                {% endfor %}
+
+                
+            </div>
+        </section>
+    </div>
+
+    <div class="lg:col-span-1 space-y-6">
+        
+        <div class="bg-white p-6 shadow-sm border border-gray-100">
+            <h2 class="text-lg font-bold border-b border-gray-300 pb-2 mb-4 text-gray-900">{{about.about_heading}}</h2>
+            <p class="text-sm text-gray-600 leading-relaxed">
+                {{about.about_description}}
+            </p>
+        </div>
+
+        <div class="bg-white p-6 shadow-sm border border-gray-100">
+            <h2 class="text-lg font-bold border-b border-gray-300 pb-2 mb-4 text-gray-900">Links & Profiles</h2>
+            <div class="flex flex-col space-y-3 text-sm">
+                {% for social_media in social_links %}
+          <p>
+            <a href="{{ social_media.social_media_link }}" class="text-blue-600 underline" target="_blank">{{ social_media.social_media_name }}</a>
+          </p>
+        {% endfor %}
+            </div>
+        </div>
+
+        <div class="bg-white p-6 shadow-sm border border-gray-100">
+            <h2 class="text-lg font-bold border-b border-gray-300 pb-2 mb-4 text-gray-900">Tech Stack</h2>
+            
+
+            <div class="mb-4">
+                <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">AI/ML </h4>
+                <div class="flex flex-wrap gap-2 text-sm">
+                    {% for ai in ai_skill %}
+                    <span class="bg-gray-100 px-3 py-1 rounded border border-gray-200 text-gray-700">{{ai}}</span>
+                    {% endfor%}
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">Frontend</h4>
+                <div class="flex flex-wrap gap-2 text-sm">
+                    {% for frontend in frontend_skill %}
+                    <span class="bg-gray-100 px-3 py-1 rounded border border-gray-200 text-gray-700">{{frontend}}</span>
+                {% endfor %}
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">Backend</h4>
+                <div class="flex flex-wrap gap-2 text-sm">
+                    {% for backend in backend_skill %}
+                    <span class="bg-gray-100 px-3 py-1 rounded border border-gray-200 text-gray-700">{{backend}}</span>
+                    {% endfor %}
+
+            </div>
+
+            <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">Tools</h4>
+                <div class="flex flex-wrap gap-2 text-sm">
+                    {% for tool in tools_skill %}
+                    <span class="bg-gray-100 px-3 py-1 rounded border border-gray-200 text-gray-700">{{tool}}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">Deployment</h4>
+                <div class="flex flex-wrap gap-2 text-sm">
+                    {% for deployment in deployment_skill %}
+                    <span class="bg-gray-100 px-3 py-1 rounded border border-gray-200 text-gray-700">{{deployment}}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+{% endblock content %}

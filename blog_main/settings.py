@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'assignments',
     'crispy_forms',
     'crispy_tailwind',
+    'dashboards',
+    'portfolio',
 ]
 
 MIDDLEWARE = [
